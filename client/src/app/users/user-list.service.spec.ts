@@ -75,16 +75,16 @@ describe('User list service: ', () => {
     req.flush(testUsers);
   });
 
-  it('getUserById() calls api/users/id', () => {
-    const targetUser: User = testUsers[1];
-    const targetId: string = targetUser.id;
-    userListService.getUserById(targetId).subscribe(
-      user => expect(user).toBe(targetUser)
-    );
-
-    const expectedUrl: string = userListService.userUrl + '/' + targetId;
-    const req = httpTestingController.expectOne(expectedUrl);
-    expect(req.request.method).toEqual('GET');
-    req.flush(targetUser);
-  });
+  // it('getUserById() calls api/users/id', () => {
+  //   const targetUser: User = testUsers[1];
+  //   const targetId: string = targetUser.id;
+  //   userListService.getUserById(targetId).subscribe(
+  //     user => expect(user).toBe(targetUser)
+  //   );
+  //
+  //   const expectedUrl: string = userListService.userUrl + '/' + targetId;
+  //   const req = httpTestingController.expectOne(expectedUrl);
+  //   expect(req.request.method).toEqual('GET');
+  //   req.flush(targetUser);
+  // });
 });
