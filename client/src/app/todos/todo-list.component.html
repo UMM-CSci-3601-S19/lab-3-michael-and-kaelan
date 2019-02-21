@@ -6,18 +6,18 @@
       <mat-divider></mat-divider>
       <mat-card-content>
         <mat-form-field>
-          <input matInput id="todoName" #input placeholder="Filter by name" (input)="todoName = $event.target.value">
+          <input matInput id="todoOwner" #input placeholder="Filter by owner" (input)="todoOwner = $event.target.value">
         </mat-form-field>
         <mat-form-field>
-          <input matInput id="todoAge" #input type="number" placeholder="Filter by age"
-                 (input)="todoAge = $event.target.value">
+          <input matInput id="todoStatus" #input type="number" placeholder="Filter by status"
+                 (input)="todoStatus = $event.target.value">
         </mat-form-field>
         <!--<mat-form-field>-->
         <!--<input matInput id="todoCompany" #input type="text" placeholder="Search for company" (input)="contentChange($event.target.value)">-->
         <!--</mat-form-field>-->
 
         <mat-accordion *ngIf="todos; else todosError">
-          <mat-expansion-panel #elem [id]="todo._id" *ngFor="let todo of this.filterTodos(todoName, todoAge)">
+          <mat-expansion-panel #elem [id]="todo._id" *ngFor="let todo of this.filterTodos(todoOwner, todoStatus)">
             <mat-expansion-panel-header>
 
               <mat-panel-title matTooltip="email: {{todo.owner}}">{{todo.owner}}</mat-panel-title>

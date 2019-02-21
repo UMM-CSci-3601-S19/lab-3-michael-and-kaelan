@@ -55,12 +55,11 @@ describe('Todo component', () => {
     });
   }));
 
-  // it('can retrieve Pat by ID', () => {
-  //   todoComponent.setId('pat_id');
-  //   expect(todoComponent.todo).toBeDefined();
-  //   expect(todoComponent.todo.owner).toBe('Pat');
-  //   expect(todoComponent.todo.email).toBe('pat@something.com');
-  // });
+  it('can retrieve Pat by ID', () => {
+    todoComponent.setId('58895985a22c04e761776d54');
+    expect(todoComponent.todo).toBeDefined();
+    expect(todoComponent.todo.owner).toBe('Blanche');
+  });
 
   it('returns undefined for Santa', () => {
     todoComponent.setId('Santa');

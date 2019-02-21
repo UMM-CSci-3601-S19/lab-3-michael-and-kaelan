@@ -15,8 +15,8 @@ export class TodoListComponent implements OnInit {
   public todos: Todo[];
   public filteredTodos: Todo[];
 
-  public todoName: string;
-  public todoAge: number;
+  public todoOwner: string;
+  public todoStatus: boolean;
 
 
   // Inject the TodoListService into this component.
@@ -29,25 +29,26 @@ export class TodoListComponent implements OnInit {
 
   }
 
-  public filterTodos(searchName: string, searchAge: number): Todo[] {
+  //TODO: Check out method again. I was sloppy and changed around the names and parameters of this function without thinking. searchStatus used to be an integer.
+  public filterTodos(searchOwner: string, searchStatus: boolean): Todo[] {
 
     this.filteredTodos = this.todos;
 
     // Filter by owner
-    if (searchName != null) {
-      searchName = searchName.toLocaleLowerCase();
+    if (searchOwner != null) {
+      searchOwner = searchOwner.toLocaleLowerCase();
 
       this.filteredTodos = this.filteredTodos.filter(todo => {
-        return !searchName || todo.owner.toLowerCase().indexOf(searchName) !== -1;
+        return !searchOwner || todo.owner.toLowerCase().indexOf(searchOwner) !== -1;
       });
     }
 
-    // // Filter by age
-    // if (searchAge != null) {
-    //   this.filteredTodos = this.filteredTodos.filter((todo: Todo) => {
-    //     return !searchAge || (todo.age === Number(searchAge));
-    //   });
-    // }
+    // Filter by status
+    if (searchStatus != null) {
+      this.filteredTodos = this.filteredTodos.filter((todo: Todo) => {
+        return !searchStatus || (todo.status === searchStatus);
+      });
+    }
 
     return this.filteredTodos;
   }
@@ -67,7 +68,7 @@ export class TodoListComponent implements OnInit {
     todos.subscribe(
       returnedTodos => {
         this.todos = returnedTodos;
-        this.filterTodos(this.todoName, this.todoAge);
+        this.filterTodos(this.todoOwner, this.todoStatus);
       },
       err => {
         console.log(err);

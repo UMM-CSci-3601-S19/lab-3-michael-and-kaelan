@@ -45,6 +45,55 @@ describe('Todo list', () => {
           status: true,
           body: "Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.",
           category: "homework"
+        },
+        {
+          _id: "58895985186754887e0381f5",
+          owner: "Blanche",
+          status: true,
+          body: "Incididunt enim ea sit qui esse magna eu. Nisi sunt exercitation est Lorem consectetur incididunt cupidatat laboris commodo veniam do ut sint.",
+          category: "software design"
+        },
+        {
+          _id: "5889598555fbbad472586a56",
+          owner: "Blanche",
+          status: true,
+          body: "Aliqua esse aliqua veniam id nisi ea. Ullamco Lorem ex aliqua aliquip cupidatat incididunt reprehenderit voluptate ad nisi elit dolore laboris.",
+          category: "groceries"
+        },
+        {
+          _id: "588959856f0b82ee93cd93eb",
+          owner: "Barry",
+          status: true,
+          body: "Nisi sit non non sunt veniam pariatur. Elit reprehenderit aliqua consectetur est dolor officia et adipisicing elit officia nisi elit enim nisi.",
+          category: "video games"
+        },
+        {
+          _id: "5889598585bda42fb8388ba1",
+          owner: "Blanche",
+          status: false,
+          body: "Laborum incididunt nisi eiusmod aliqua velit quis occaecat excepteur ut in ad. Commodo adipisicing sint ipsum irure amet exercitation voluptate mollit.",
+          category: "homework"
+        },
+        {
+          _id: "588959850ccede43cc675826",
+          owner: "Blanche",
+          status: true,
+          body: "Nostrud ullamco labore exercitation magna. Excepteur aute aliqua veniam veniam nisi eu occaecat ea magna do.",
+          category: "homework"
+        },
+        {
+          _id: "58895985ee4964bdc668bd9e",
+          owner: "Fry",
+          status: false,
+          body: "Veniam ut ex sit voluptate Lorem. Laboris ipsum nulla proident aute culpa esse aute pariatur velit deserunt deserunt cillum officia dolore.",
+          category: "homework"
+        },
+        {
+          _id: "5889598528c4748a0292e014",
+          owner: "Workman",
+          status: true,
+          body: "Eiusmod commodo officia amet aliquip est ipsum nostrud duis sunt voluptate mollit excepteur. Sunt non in pariatur et culpa est sunt.",
+          category: "software design"
         }
       ])
     };
@@ -69,7 +118,7 @@ describe('Todo list', () => {
   }));
 
   it('contains all the todos', () => {
-    expect(todoList.todos.length).toBe(3);
+    expect(todoList.todos.length).toBe(10);
   });
 
   it('contains a todo named \'Blanche\'', () => {
@@ -80,36 +129,41 @@ describe('Todo list', () => {
     expect(todoList.todos.some((todo: Todo) => todo.owner === 'Fry')).toBe(true);
   });
 
+  it('contain a todo named \'Barry\'', () => {
+    expect(todoList.todos.some((todo: Todo) => todo.owner === 'Barry')).toBe(true);
+  });
+
   it('doesn\'t contain a todo named \'Santa\'', () => {
     expect(todoList.todos.some((todo: Todo) => todo.owner === 'Santa')).toBe(false);
   });
 
   it('has seventy-nine todos that are 37 years old', () => {
-    expect(todoList.todos.filter((todo: Todo) => todo.category === "homework").length).toBe(79);
-  });
-  it('todo list filters by name', () => {
-    expect(todoList.filteredTodos.length).toBe(3);
-    todoList.todoName = 'a';
-    const a: Observable<Todo[]> = todoList.refreshTodos();
-    a.do(x => Observable.of(x))
-      .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));
+    expect(todoList.todos.filter((todo: Todo) => todo.category === "homework").length).toBe(4);
   });
 
-  it('todo list filters by age', () => {
-    expect(todoList.filteredTodos.length).toBe(3);
-    todoList.todoAge = 37;
+  it('todo list filters by owner', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoOwner = 'a';
     const a: Observable<Todo[]> = todoList.refreshTodos();
     a.do(x => Observable.of(x))
-      .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(7));
   });
 
-  it('todo list filters by name and age', () => {
-    expect(todoList.filteredTodos.length).toBe(3);
-    todoList.todoAge = 37;
-    todoList.todoName = 'i';
+  it('todo list filters by status', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoStatus = true;
     const a: Observable<Todo[]> = todoList.refreshTodos();
     a.do(x => Observable.of(x))
-      .subscribe(x => expect(todoList.filteredTodos.length).toBe(1));
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(6));
+  });
+
+  it('todo list filters by owner and status', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoStatus = true;
+    todoList.todoOwner = 'i';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(0));
   });
 
 });
