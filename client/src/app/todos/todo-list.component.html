@@ -9,7 +9,7 @@
           <input matInput id="todoOwner" #input placeholder="Filter by owner" (input)="todoOwner = $event.target.value">
         </mat-form-field>
         <mat-form-field>
-          <input matInput id="todoStatus" #input type="number" placeholder="Filter by status"
+          <input matInput id="todoStatus" #input placeholder="Filter by status"
                  (input)="todoStatus = $event.target.value">
         </mat-form-field>
         <!--<mat-form-field>-->
@@ -23,10 +23,10 @@
               <mat-panel-title matTooltip="id: {{todo._id}}">{{todo._id}}</mat-panel-title>
 
             </mat-expansion-panel-header>
-            <mat-panel-description>Owner {{todo.owner}}</mat-panel-description>
-            <mat-panel-description>Status: {{todo.status}} years old</mat-panel-description>
+            <mat-panel-description>Owner: {{todo.owner}}</mat-panel-description>
+            <mat-panel-description>Status: {{todo.status}}</mat-panel-description>
             <mat-panel-description>Body: {{todo.body}}</mat-panel-description>
-            <mat-panel-description>Category: {{todo.category}} years old</mat-panel-description>
+            <mat-panel-description>Category: {{todo.category}}</mat-panel-description>
 
           </mat-expansion-panel>
         </mat-accordion>

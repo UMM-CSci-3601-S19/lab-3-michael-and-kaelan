@@ -18,7 +18,6 @@ export class TodoListComponent implements OnInit {
   public todoOwner: string;
   public todoStatus: boolean;
 
-
   // Inject the TodoListService into this component.
   // That's what happens in the following constructor.
   //
