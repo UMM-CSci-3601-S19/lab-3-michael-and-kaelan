@@ -1,4 +1,4 @@
-import {UserPage} from './user-list.po';
+import {TodoPage} from './todo-list.po';
 import {browser, protractor} from 'protractor';
 
 let origFn = browser.driver.controlFlow().execute;
@@ -17,37 +17,31 @@ browser.driver.controlFlow().execute = function () {
     return origFn.apply(browser.driver.controlFlow(), args);
 };
 
-describe('User list', () => {
-    let page: UserPage;
+describe('Todo list', () => {
+    let page: TodoPage;
 
     beforeEach(() => {
-        page = new UserPage();
+        page = new TodoPage();
     });
 
-    it('should get and highlight User Name attribute ', () => {
+    it('should get and highlight Todo Name attribute ', () => {
         page.navigateTo();
-        expect(page.getUserTitle()).toEqual('Users');
+        expect(page.getTodoTitle()).toEqual('Todos');
     });
 
     it('should type something in filter name box and check that it returned correct element', () => {
         page.navigateTo();
-        page.typeAName("t");
-        expect(page.getUniqueUser("kittypage@surelogic.com")).toEqual("Kitty Page");
+        page.typeAName("r");
+        expect(page.getUniqueTodo("58895985c1849992336c219b")).toEqual("58895985c1849992336c219b (Fry)");
         page.backspace();
-        page.typeAName("lynn")
-        expect(page.getUniqueUser("lynnferguson@niquent.com")).toEqual("Lynn Ferguson");
-    });
-
-    it('should click on the age 27 times and return 3 elements', () => {
-        page.navigateTo();
-        page.getUserByAge();
-        for (let i = 0; i < 27; i++) {
-            page.selectUpKey();
+        page.typeAName("Workman")
+        expect(page.getUniqueTodo("5889598528c4748a0292e014")).toEqual("5889598528c4748a0292e014 (Workman)");
+        for (let i = 0; i < 7; i++) {
+          page.backspace();
         }
-
-        expect(page.getUniqueUser("stokesclayton@momentia.com")).toEqual("Stokes Clayton");
-
-        expect(page.getUniqueUser("merrillparker@escenta.com")).toEqual("Merrill Parker");
-
+        page.typeAName("b")
+        expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("58895985a22c04e761776d54 (Blanche)");
     });
+
+//    TODO: Owner name filtering in combination with STATUS and BODY
 });
