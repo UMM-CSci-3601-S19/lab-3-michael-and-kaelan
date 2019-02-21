@@ -29,17 +29,33 @@ describe('Todo list', () => {
         expect(page.getTodoTitle()).toEqual('Todos');
     });
 
-    it('should type something in filter name box and check that it returned correct element', () => {
+    it('should type something in filter owner box and check that it returned correct element', () => {
         page.navigateTo();
-        page.typeAName("r");
+        page.typeAnOwner("r");
         expect(page.getUniqueTodo("58895985c1849992336c219b")).toEqual("58895985c1849992336c219b (Fry)");
         page.backspace();
-        page.typeAName("Workman")
+        page.typeAnOwner("Workman")
         expect(page.getUniqueTodo("5889598528c4748a0292e014")).toEqual("5889598528c4748a0292e014 (Workman)");
         for (let i = 0; i < 7; i++) {
           page.backspace();
         }
-        page.typeAName("b")
+        page.typeAnOwner("b")
+        expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("58895985a22c04e761776d54 (Blanche)");
+    });
+
+    it('should type something in filter body box and check that it returned correct element', () => {
+        page.navigateTo();
+        page.typeABody("non");
+        expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("58895985a22c04e761776d54 (Blanche)");
+        for (let i = 0; i < 3; i++) {
+          page.backspace();
+        }
+        page.typeABody("ut in")
+        expect(page.getUniqueTodo("5889598585bda42fb8388ba1")).toEqual("5889598585bda42fb8388ba1 (Blanche)");
+        for (let i = 0; i < 5; i++) {
+          page.backspace();
+        }
+        page.typeABody("commodo quis")
         expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("58895985a22c04e761776d54 (Blanche)");
     });
 
