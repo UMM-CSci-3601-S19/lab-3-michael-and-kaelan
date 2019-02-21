@@ -60,4 +60,10 @@ describe('Todo list', () => {
     });
 
 //    TODO: Owner name filtering in combination with STATUS and BODY
+    it('should type something in filter owner and filter body boxes and check that it returned correct element', () => {
+      page.navigateTo();
+      page.typeAnOwner("blanche");
+      page.typeABody("sint ipsum")
+      expect(page.getUniqueTodo("5889598585bda42fb8388ba1")).toEqual("5889598585bda42fb8388ba1 (Blanche)");
+    });
 });
