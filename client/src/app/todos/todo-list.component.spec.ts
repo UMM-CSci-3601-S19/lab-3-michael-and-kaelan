@@ -121,6 +121,7 @@ describe('Todo list', () => {
     expect(todoList.todos.length).toBe(10);
   });
 
+  //BEGIN name contains
   it('contains a todo named \'Blanche\'', () => {
     expect(todoList.todos.some((todo: Todo) => todo.owner === 'Blanche')).toBe(true);
   });
@@ -136,18 +137,61 @@ describe('Todo list', () => {
   it('doesn\'t contain a todo named \'Santa\'', () => {
     expect(todoList.todos.some((todo: Todo) => todo.owner === 'Santa')).toBe(false);
   });
+  //END name contains
 
   it('has seventy-nine todos that are 37 years old', () => {
     expect(todoList.todos.filter((todo: Todo) => todo.category === "homework").length).toBe(4);
   });
 
-  it('todo list filters by owner', () => {
+  //BEGIN owner name letter containment
+  it('todo list filters by owner containing \'a\' in name', () => {
     expect(todoList.filteredTodos.length).toBe(10);
     todoList.todoOwner = 'a';
     const a: Observable<Todo[]> = todoList.refreshTodos();
     a.do(x => Observable.of(x))
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(7));
   });
+
+  it('todo list filters by owner containing \'e\' in name', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoOwner = 'e';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(5));
+  });
+
+  it('todo list filters by owner containing \'i\' in name', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoOwner = 'i';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(0));
+  });
+
+  it('todo list filters by owner containing \'o\'', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoOwner = 'o';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(1));
+  });
+
+  it('todo list filters by owner containing \'u\' in name', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoOwner = 'u';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(0));
+  });
+
+  it('todo list filters by owner containing \'1\' in name', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoOwner = '1';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(0));
+  });
+  // END owner names letter containment
 
   it('todo list filters by status', () => {
     expect(todoList.filteredTodos.length).toBe(10);
