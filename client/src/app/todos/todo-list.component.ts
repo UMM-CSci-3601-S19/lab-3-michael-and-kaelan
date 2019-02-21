@@ -44,6 +44,8 @@ export class TodoListComponent implements OnInit {
 
     // Filter by status
     if (searchStatus != null) {
+      // searchStatus = searchStatus.toLocaleLowerCase();
+
       this.filteredTodos = this.filteredTodos.filter((todo: Todo) => {
         return !searchStatus || (todo.status === searchStatus);
       });
