@@ -26,8 +26,14 @@ export class TodoPage {
         return title;
     }
 
-    typeAName(name: string) {
+    typeAnOwner(name: string) {
         let input = element(by.id('todoOwner'));
+        input.click();
+        input.sendKeys(name);
+    }
+
+    typeABody(name: string) {
+        let input = element(by.id('todoBody'));
         input.click();
         input.sendKeys(name);
     }
@@ -41,7 +47,6 @@ export class TodoPage {
     backspace(){
         browser.actions().sendKeys(Key.BACK_SPACE).perform();
     }
-
 
     getUniqueTodo(_id:string) {
         let todo = element(by.id(_id)).getText();

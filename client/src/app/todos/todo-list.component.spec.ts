@@ -139,9 +139,34 @@ describe('Todo list', () => {
   });
   //END name contains
 
-  it('has seventy-nine todos that are 37 years old', () => {
+  // BEGIN body contains
+  it('contains a todo body contains \'In sunt ex ... quis. Cillum non labore ex sint esse.\'', () => {
+    expect(todoList.todos.some((todo: Todo) => todo.body === 'In sunt ex non tempor cillum commodo amet incididunt anim qui commodo quis. Cillum non labore ex sint esse.')).toBe(true);
+  });
+
+  it('contains a todo body contains \'Eiusmod commodo ... sunt.\'', () => {
+    expect(todoList.todos.some((todo: Todo) => todo.body === 'Eiusmod commodo officia amet aliquip est ipsum nostrud duis sunt voluptate mollit excepteur. Sunt non in pariatur et culpa est sunt.')).toBe(true);
+  });
+
+  it('doesn\'t EQUAL a todo body with \'Santa\'', () => {
+    expect(todoList.todos.some((todo: Todo) => todo.body === 'Santa')).toBe(false);
+  });
+  //END body contains
+
+  it('has 4 todos that contain category \'homework\'', () => {
     expect(todoList.todos.filter((todo: Todo) => todo.category === "homework").length).toBe(4);
   });
+
+  //BEGIN todo body letter containment
+  it('todo list filters by owner containing \'a\' in name', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoBody = 'a';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(10));
+  });
+  //END todo body letter containment
+
 
   //BEGIN owner name letter containment
   it('todo list filters by owner containing \'a\' in name', () => {
@@ -168,7 +193,7 @@ describe('Todo list', () => {
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(0));
   });
 
-  it('todo list filters by owner containing \'o\'', () => {
+  it('todo list filters by owner containing \'o\' in name', () => {
     expect(todoList.filteredTodos.length).toBe(10);
     todoList.todoOwner = 'o';
     const a: Observable<Todo[]> = todoList.refreshTodos();
@@ -201,15 +226,34 @@ describe('Todo list', () => {
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(6));
   });
 
-  it('todo list filters by owner and status', () => {
+  //BEGIN combination filters
+  it('todo list filters by owner with \'bla\'and body with \'non\'', () => {
     expect(todoList.filteredTodos.length).toBe(10);
-    todoList.todoStatus = true;
-    todoList.todoOwner = 'i';
+    todoList.todoBody = 'non';
+    todoList.todoOwner = 'bla';
     const a: Observable<Todo[]> = todoList.refreshTodos();
     a.do(x => Observable.of(x))
-      .subscribe(x => expect(todoList.filteredTodos.length).toBe(0));
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(1));
   });
 
+  it('todo list filters by owner with \'r\' and body with \'sunt\'', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoBody = 'sunt';
+    todoList.todoOwner = 'r';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));
+  });
+
+  it('todo list filters by owner with \'y\' and body with \'ex\'', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoBody = 'ex';
+    todoList.todoOwner = 'y';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));
+  });
+  //END combination filters
 });
 
 describe('Misbehaving Todo List', () => {
