@@ -2,10 +2,10 @@
   <div flex-gt-sm="80" flex-offset-gt-sm="10">
     <mat-card>
       <mat-card-title id="hello-world">{{ this.text }}</mat-card-title>
-      <mat-card-subtitle>this is a card</mat-card-subtitle>
+      <mat-card-subtitle>Here us out</mat-card-subtitle>
       <mat-divider></mat-divider>
       <mat-card-content>
-        card content
+        There are two ways that you can filter things in this lab. The Users and Todos pages that are linked from the sidebar implement filtering purely on the client side using Angular. The other way of filtering using server side filtering per todo owner and then uses Angular's client side filtering for the rest of the owner's relevant todos. Each of those can be navigated to from the sidebar by clicking on the owner's respective page link. The act of going to that page does the server side filtering which is implemented by todo-list-service.ts's getTodosByOwner() method.
       </mat-card-content>
     </mat-card>
   </div>
