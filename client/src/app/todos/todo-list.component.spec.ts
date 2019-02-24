@@ -218,13 +218,24 @@ describe('Todo list', () => {
   });
   // END owner names letter containment
 
-  it('todo list filters by status', () => {
+  //BEGIN status
+  it('todo list filters by status of true', () => {
     expect(todoList.filteredTodos.length).toBe(10);
-    todoList.todoStatus = true;
+    todoList.todoStatus = "complete";
     const a: Observable<Todo[]> = todoList.refreshTodos();
     a.do(x => Observable.of(x))
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(6));
   });
+
+  it('todo list filters by status of false', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoStatus = "incomplete";
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(4));
+  });
+
+  //END status
 
   //BEGIN combination filters
   it('todo list filters by owner with \'bla\'and body with \'non\'', () => {
@@ -249,6 +260,26 @@ describe('Todo list', () => {
     expect(todoList.filteredTodos.length).toBe(10);
     todoList.todoBody = 'ex';
     todoList.todoOwner = 'y';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));
+  });
+
+  it('todo list filters by owner with \'y\' and body with \'ex\' and status \'complete\'', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoBody = 'ex';
+    todoList.todoOwner = 'y';
+    todoList.todoStatus = 'incomplete';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));
+  });
+
+  it('todo list filters by owner with \'Fry\' and body with \'i\' and status \'incomplete\'', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoBody = 'i';
+    todoList.todoOwner = 'Fry';
+    todoList.todoStatus = 'incomplete';
     const a: Observable<Todo[]> = todoList.refreshTodos();
     a.do(x => Observable.of(x))
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));

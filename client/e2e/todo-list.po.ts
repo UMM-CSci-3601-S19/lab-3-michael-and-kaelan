@@ -38,6 +38,12 @@ export class TodoPage {
         input.sendKeys(name);
     }
 
+    typeAStatus(name: string) {
+        let input = element(by.id('todoStatus'));
+        input.click();
+        input.sendKeys(name);
+    }
+
     // getTodoByAge() {
     //     let input = element(by.id('todoName'));
     //     input.click();
