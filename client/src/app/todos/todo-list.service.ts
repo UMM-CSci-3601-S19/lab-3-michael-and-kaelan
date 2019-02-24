@@ -22,7 +22,7 @@ export class TodoListService {
   }
 
 //our new serverside filtering
-  getTodosByOwner(owner: string): Observable<Todo[]> {
-    return this.httpClient.get<Todo[]>(this.todoUrl + '/' + owner);
+  getTodosByOwner(): Observable<Todo[]> {
+    return this.httpClient.get<Todo[]>(this.todoUrl + '?owner=Fry');
   }
 }
