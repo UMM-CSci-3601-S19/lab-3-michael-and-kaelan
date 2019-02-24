@@ -264,6 +264,26 @@ describe('Todo list', () => {
     a.do(x => Observable.of(x))
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));
   });
+
+  it('todo list filters by owner with \'y\' and body with \'ex\' and status \'complete\'', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoBody = 'ex';
+    todoList.todoOwner = 'y';
+    todoList.todoStatus = 'incomplete';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));
+  });
+
+  it('todo list filters by owner with \'Fry\' and body with \'i\' and status \'incomplete\'', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoBody = 'i';
+    todoList.todoOwner = 'Fry';
+    todoList.todoStatus = 'incomplete';
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(2));
+  });
   //END combination filters
 });
 

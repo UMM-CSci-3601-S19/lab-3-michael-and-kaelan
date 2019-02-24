@@ -55,15 +55,16 @@ describe('Todo list', () => {
         for (let i = 0; i < 5; i++) {
           page.backspace();
         }
-        page.typeABody("commodo quis")
+        page.typeABody("commodo quis");
         expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("58895985a22c04e761776d54 (Blanche)");
     });
 
 //    TODO: Owner name filtering in combination with STATUS and BODY
-    it('should type something in filter owner and filter body boxes and check that it returned correct element', () => {
+    it('should type something in filter owner and filter body and filter status boxes and check that it returned correct element', () => {
       page.navigateTo();
       page.typeAnOwner("blanche");
-      page.typeABody("sint ipsum")
+      page.typeABody("sint ipsum");
+      page.typeAStatus("incomplete");
       expect(page.getUniqueTodo("5889598585bda42fb8388ba1")).toEqual("5889598585bda42fb8388ba1 (Blanche)");
     });
 });
