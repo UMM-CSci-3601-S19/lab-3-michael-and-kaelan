@@ -10,6 +10,7 @@ import {Todo} from './todo';
 export class TodoComponent implements OnInit {
   public todo: Todo = null;
   private id: string;
+  private owner: string;
 
   constructor(private todoListService: TodoListService) {
     // this.todos = this.todoListService.getTodos();
@@ -26,12 +27,29 @@ export class TodoComponent implements OnInit {
     }
   }
 
+  // private subscribeToServiceForOwner() {
+  //   if (this.owner) {
+  //     this.todoListService.getTodoByOwner(this.owner).subscribe(
+  //       todo => this.todo = todo[],
+  //       err => {
+  //         console.log(err);
+  //       }
+  //     );
+  //   }
+  // }
+
   setId(id: string) {
     this.id = id;
     this.subscribeToServiceForId();
   }
 
+  // setOwner(owner: string) {
+  //   this.owner = owner;
+  //   this.subscribeToServiceForOwner();
+  // }
+
   ngOnInit(): void {
     this.subscribeToServiceForId();
+    // this.subscribeToServiceForOwner();
   }
 }
