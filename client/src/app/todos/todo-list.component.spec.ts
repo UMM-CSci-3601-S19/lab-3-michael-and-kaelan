@@ -218,13 +218,24 @@ describe('Todo list', () => {
   });
   // END owner names letter containment
 
-  it('todo list filters by status', () => {
+  //BEGIN status
+  it('todo list filters by status of true', () => {
     expect(todoList.filteredTodos.length).toBe(10);
-    todoList.todoStatus = true;
+    todoList.todoStatus = "true";
     const a: Observable<Todo[]> = todoList.refreshTodos();
     a.do(x => Observable.of(x))
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(6));
   });
+
+  it('todo list filters by status of false', () => {
+    expect(todoList.filteredTodos.length).toBe(10);
+    todoList.todoStatus = "false";
+    const a: Observable<Todo[]> = todoList.refreshTodos();
+    a.do(x => Observable.of(x))
+      .subscribe(x => expect(todoList.filteredTodos.length).toBe(4));
+  });
+
+  //END status
 
   //BEGIN combination filters
   it('todo list filters by owner with \'bla\'and body with \'non\'', () => {
