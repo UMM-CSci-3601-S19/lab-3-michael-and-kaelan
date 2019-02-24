@@ -221,7 +221,7 @@ describe('Todo list', () => {
   //BEGIN status
   it('todo list filters by status of true', () => {
     expect(todoList.filteredTodos.length).toBe(10);
-    todoList.todoStatus = "true";
+    todoList.todoStatus = "complete";
     const a: Observable<Todo[]> = todoList.refreshTodos();
     a.do(x => Observable.of(x))
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(6));
@@ -229,7 +229,7 @@ describe('Todo list', () => {
 
   it('todo list filters by status of false', () => {
     expect(todoList.filteredTodos.length).toBe(10);
-    todoList.todoStatus = "false";
+    todoList.todoStatus = "incomplete";
     const a: Observable<Todo[]> = todoList.refreshTodos();
     a.do(x => Observable.of(x))
       .subscribe(x => expect(todoList.filteredTodos.length).toBe(4));
