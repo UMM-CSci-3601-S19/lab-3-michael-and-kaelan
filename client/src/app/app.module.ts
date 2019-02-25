@@ -14,7 +14,7 @@ import {APP_BASE_HREF} from '@angular/common';
 
 import {CustomModule} from './custom.module';
 import {UserComponent} from './users/user.component';
-import {TodoComponent} from './todos/todo.component';
+import {FryComponent} from './todos/Fry/fry.component';
 import {TodoListComponent} from "./todos/todo-list.component";
 
 
@@ -30,7 +30,7 @@ import {TodoListComponent} from "./todos/todo-list.component";
     HomeComponent,
     UserListComponent,
     UserComponent,
-    TodoComponent,
+    FryComponent,
     TodoListComponent
 
   ],

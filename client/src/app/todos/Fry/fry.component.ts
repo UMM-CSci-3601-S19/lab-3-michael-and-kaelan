@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {TodoListService} from './todo-list.service';
-import {Todo} from './todo';
+import {TodoListService} from '../todo-list.service';
+import {Todo} from '../todo';
 import {Observable} from "rxjs/Observable";
 
 @Component({
-  selector: 'app-todo-component',
-  styleUrls: ['./todo.component.css'],
-  templateUrl: 'todo.component.html'
+  selector: 'app-fry-component',
+  styleUrls: ['./fry.component.css'],
+  templateUrl: 'fry.component.html',
+  providers: []
 })
-export class TodoComponent implements OnInit {
+export class FryComponent implements OnInit {
   // These are public so that tests can reference them (.spec.ts)
   public todos: Todo[];
   public filteredTodos: Todo[];
@@ -17,6 +18,9 @@ export class TodoComponent implements OnInit {
   public todoStatus: string;
   public todoBody: string;
 
+  public todo: Todo = null;
+  private id: string;
+
   // Inject the TodoListService into this component.
   // That's what happens in the following constructor.
   //
@@ -24,7 +28,7 @@ export class TodoComponent implements OnInit {
   // with the server.
 
   constructor(private todoListService: TodoListService) {
-
+    // this.todos = this.todoListService.getTodos();
   }
 
   //TODO: Check out method again. I was sloppy and changed around the names and parameters of this function without thinking. searchStatus used to be an integer.
@@ -78,6 +82,22 @@ export class TodoComponent implements OnInit {
         console.log(err);
       });
     return todos;
+  }
+
+  private subscribeToServiceForId() {
+    if (this.id) {
+      this.todoListService.getTodoById(this.id).subscribe(
+        todo => this.todo = todo,
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  }
+
+  setId(id: string) {
+    this.id = id;
+    this.subscribeToServiceForId();
   }
 
   ngOnInit(): void {
