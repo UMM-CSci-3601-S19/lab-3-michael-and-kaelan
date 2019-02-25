@@ -17,6 +17,11 @@ import {UserComponent} from './users/user.component';
 import {FryComponent} from './todos/Fry/fry.component';
 import {TodoListComponent} from "./todos/todo-list.component";
 
+//added by Michael due to error I posted in Slack
+import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 @NgModule({
   imports: [
@@ -24,7 +29,11 @@ import {TodoListComponent} from "./todos/todo-list.component";
     HttpClientModule,
     Routing,
     CustomModule,
-  ],
+    MatCardModule,
+    MatTooltipModule,
+    MatExpansionModule
+
+],
   declarations: [
     AppComponent,
     HomeComponent,

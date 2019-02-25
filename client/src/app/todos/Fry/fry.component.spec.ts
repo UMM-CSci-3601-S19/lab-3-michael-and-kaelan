@@ -4,6 +4,7 @@ import {FryComponent} from './fry.component';
 import {TodoListService} from '../todo-list.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import {MatCardModule} from '@angular/material/card';
 
 describe('Todo component', () => {
 
@@ -93,6 +94,7 @@ describe('Todo component', () => {
 
     TestBed.configureTestingModule({
       declarations: [FryComponent],
+      imports: [MatCardModule],
       providers: [{provide: TodoListService, useValue: todoListServiceStub}]
     });
   });

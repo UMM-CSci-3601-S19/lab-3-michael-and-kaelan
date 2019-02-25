@@ -11,15 +11,17 @@ import {Observable} from "rxjs/Observable";
 })
 export class FryComponent implements OnInit {
   // These are public so that tests can reference them (.spec.ts)
+
+  public todo: Todo = null;
+  private id_: string;
+
   public todos: Todo[];
   public filteredTodos: Todo[];
 
-  public todoOwner: string;
   public todoStatus: string;
   public todoBody: string;
 
-  public todo: Todo = null;
-  private id: string;
+
 
   // Inject the TodoListService into this component.
   // That's what happens in the following constructor.
@@ -32,7 +34,7 @@ export class FryComponent implements OnInit {
   }
 
   //TODO: Check out method again. I was sloppy and changed around the names and parameters of this function without thinking. searchStatus used to be an integer.
-  public filterTodos(searchStatus: string, searchBody: string): Todo[] {
+  public filterTodosForUser(searchStatus: string, searchBody: string): Todo[] {
 
     this.filteredTodos = this.todos;
 
@@ -76,7 +78,7 @@ export class FryComponent implements OnInit {
     todos.subscribe(
       returnedTodos => {
         this.todos = returnedTodos;
-        this.filterTodos(this.todoStatus, this.todoBody);
+        this.filterTodosForUser(this.todoStatus, this.todoBody);
       },
       err => {
         console.log(err);
@@ -85,8 +87,8 @@ export class FryComponent implements OnInit {
   }
 
   private subscribeToServiceForId() {
-    if (this.id) {
-      this.todoListService.getTodoById(this.id).subscribe(
+    if (this.id_) {
+      this.todoListService.getTodoById(this.id_).subscribe(
         todo => this.todo = todo,
         err => {
           console.log(err);
@@ -96,7 +98,7 @@ export class FryComponent implements OnInit {
   }
 
   setId(id: string) {
-    this.id = id;
+    this.id_ = id;
     this.subscribeToServiceForId();
   }
 
