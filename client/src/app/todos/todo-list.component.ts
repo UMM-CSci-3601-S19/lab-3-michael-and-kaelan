@@ -29,7 +29,6 @@ export class TodoListComponent implements OnInit {
 
   }
 
-  //TODO: Check out method again. I was sloppy and changed around the names and parameters of this function without thinking. searchStatus used to be an integer.
   public filterTodos(searchOwner: string, searchStatus: string, searchBody: string): Todo[] {
 
     this.filteredTodos = this.todos;

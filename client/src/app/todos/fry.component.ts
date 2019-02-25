@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {TodoListService} from '../todo-list.service';
-import {Todo} from '../todo';
+import {TodoListService} from './todo-list.service';
+import {Todo} from './todo';
 import {Observable} from "rxjs/Observable";
 
 @Component({
@@ -9,32 +9,23 @@ import {Observable} from "rxjs/Observable";
   templateUrl: 'fry.component.html',
   providers: []
 })
-export class FryComponent implements OnInit {
-  // These are public so that tests can reference them (.spec.ts)
 
+export class FryComponent implements OnInit {
   public todo: Todo = null;
-  private id_: string;
+  private id: string;
 
   public todos: Todo[];
   public filteredTodos: Todo[];
 
+  public todoOwner: string;
   public todoStatus: string;
   public todoBody: string;
-
-
-
-  // Inject the TodoListService into this component.
-  // That's what happens in the following constructor.
-  //
-  // We can call upon the service for interacting
-  // with the server.
 
   constructor(private todoListService: TodoListService) {
     // this.todos = this.todoListService.getTodos();
   }
 
-  //TODO: Check out method again. I was sloppy and changed around the names and parameters of this function without thinking. searchStatus used to be an integer.
-  public filterTodosForUser(searchStatus: string, searchBody: string): Todo[] {
+  public filterTodosForOwner(searchStatus: string, searchBody: string): Todo[] {
 
     this.filteredTodos = this.todos;
 
@@ -50,6 +41,7 @@ export class FryComponent implements OnInit {
           return !searchStatus || todo.status === true;
         });
       }
+
     }
 
     // Filter by body contents
@@ -60,13 +52,10 @@ export class FryComponent implements OnInit {
         return !searchBody || todo.body.toLowerCase().indexOf(searchBody) !== -1;
       });
     }
+
     return this.filteredTodos;
   }
 
-  /**
-   * Starts an asynchronous operation to update the todos list
-   *
-   */
   refreshTodos(): Observable<Todo[]> {
     // Get Todos returns an Observable, basically a "promise" that
     // we will get the data from the server.
@@ -78,7 +67,7 @@ export class FryComponent implements OnInit {
     todos.subscribe(
       returnedTodos => {
         this.todos = returnedTodos;
-        this.filterTodosForUser(this.todoStatus, this.todoBody);
+        this.filterTodosForOwner(this.todoStatus, this.todoBody);
       },
       err => {
         console.log(err);
@@ -87,8 +76,8 @@ export class FryComponent implements OnInit {
   }
 
   private subscribeToServiceForId() {
-    if (this.id_) {
-      this.todoListService.getTodoById(this.id_).subscribe(
+    if (this.id) {
+      this.todoListService.getTodoById(this.id).subscribe(
         todo => this.todo = todo,
         err => {
           console.log(err);
@@ -98,11 +87,14 @@ export class FryComponent implements OnInit {
   }
 
   setId(id: string) {
-    this.id_ = id;
+    this.id = id;
     this.subscribeToServiceForId();
   }
 
   ngOnInit(): void {
+    this.subscribeToServiceForId();
     this.refreshTodos();
   }
+
+
 }

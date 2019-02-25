@@ -14,13 +14,14 @@ import {APP_BASE_HREF} from '@angular/common';
 
 import {CustomModule} from './custom.module';
 import {UserComponent} from './users/user.component';
-import {FryComponent} from './todos/Fry/fry.component';
+import {FryComponent} from './todos/fry.component';
 import {TodoListComponent} from "./todos/todo-list.component";
 
 //added by Michael due to error I posted in Slack
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { NoConflictStyleCompatibilityMode } from '@angular/material'
 
 
 @NgModule({
@@ -29,9 +30,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
     HttpClientModule,
     Routing,
     CustomModule,
+    //michael added
     MatCardModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    NoConflictStyleCompatibilityMode
 
 ],
   declarations: [

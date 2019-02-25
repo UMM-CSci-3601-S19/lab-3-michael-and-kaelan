@@ -1,10 +1,16 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {Todo} from '../todo';
+import {Todo} from './todo';
 import {FryComponent} from './fry.component';
-import {TodoListService} from '../todo-list.service';
+import {TodoListService} from './todo-list.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+//added by michael
 import {MatCardModule} from '@angular/material/card';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatExpansionModule} from '@angular/material/expansion';
+//this and its below import fixed everything
+//see darksinge Jun 26 '17 @ https://stackoverflow.com/a/44768981
+import { NoConflictStyleCompatibilityMode } from '@angular/material'
 
 describe('Todo component', () => {
 
@@ -94,7 +100,7 @@ describe('Todo component', () => {
 
     TestBed.configureTestingModule({
       declarations: [FryComponent],
-      imports: [MatCardModule],
+      imports: [MatCardModule, MatTooltipModule, MatExpansionModule, NoConflictStyleCompatibilityMode],
       providers: [{provide: TodoListService, useValue: todoListServiceStub}]
     });
   });
