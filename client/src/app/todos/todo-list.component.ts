@@ -29,6 +29,12 @@ export class TodoListComponent implements OnInit {
 
   }
 
+  // public highlight(searchOwner: string, searchStatus: string, searchBody: string): Todo[] {
+  //   if (searchOwner != null) {
+  //
+  //   }
+  // }
+
   public filterTodos(searchOwner: string, searchStatus: string, searchBody: string): Todo[] {
 
     this.filteredTodos = this.todos;
@@ -85,6 +91,7 @@ export class TodoListComponent implements OnInit {
       returnedTodos => {
         this.todos = returnedTodos;
         this.filterTodos(this.todoOwner, this.todoStatus, this.todoBody);
+        // this.highlight(this.todoOwner, this.todoStatus, this.todoBody);
       },
       err => {
         console.log(err);

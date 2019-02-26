@@ -17,6 +17,8 @@ import {UserComponent} from './users/user.component';
 import {FryComponent} from './todos/fry.component';
 import {TodoListComponent} from "./todos/todo-list.component";
 
+import {TestHighlight} from "./users/testhighlight/testhighlight.component";
+
 //added by Michael due to error I posted in Slack
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -34,7 +36,7 @@ import { NoConflictStyleCompatibilityMode } from '@angular/material'
     MatCardModule,
     MatTooltipModule,
     MatExpansionModule,
-    NoConflictStyleCompatibilityMode
+    NoConflictStyleCompatibilityMode,
 
 ],
   declarations: [
@@ -43,7 +45,8 @@ import { NoConflictStyleCompatibilityMode } from '@angular/material'
     UserListComponent,
     UserComponent,
     FryComponent,
-    TodoListComponent
+    TodoListComponent,
+    TestHighlight
 
   ],
   providers: [
