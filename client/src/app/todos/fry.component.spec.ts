@@ -5,12 +5,14 @@ import {TodoListService} from './todo-list.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 //added by michael
-import {MatCardModule} from '@angular/material/card';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatExpansionModule} from '@angular/material/expansion';
+// import {MatCardModule} from '@angular/material/card';
+// import {MatTooltipModule} from '@angular/material/tooltip';
+// import {MatExpansionModule} from '@angular/material/expansion';
 //this and its below import fixed everything
 //see darksinge Jun 26 '17 @ https://stackoverflow.com/a/44768981
-import { NoConflictStyleCompatibilityMode } from '@angular/material'
+// import { NoConflictStyleCompatibilityMode } from '@angular/material'
+import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
+import {CustomModule} from '../custom.module';
 
 describe('Todo component', () => {
 
@@ -100,8 +102,8 @@ describe('Todo component', () => {
 
     TestBed.configureTestingModule({
       declarations: [FryComponent],
-      imports: [MatCardModule, MatTooltipModule, MatExpansionModule, NoConflictStyleCompatibilityMode],
-      providers: [{provide: TodoListService, useValue: todoListServiceStub}]
+      imports: [CustomModule],
+      providers: [{provide: TodoListService, useValue: todoListServiceStub},{provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
     });
   });
 

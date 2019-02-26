@@ -87,4 +87,17 @@ describe('Todo list service: ', () => {
     expect(req.request.method).toEqual('GET');
     req.flush(targetTodo);
   });
+
+  it('getTodoByOwner() calls api/todos?owner=Fry', () => {
+    const targetTodo: Todo = testTodos[1];
+    const targetId: string = targetTodo._id;
+    todoListService.getTodoById(targetId).subscribe(
+      todo => expect(todo).toBe(targetTodo)
+    );
+
+    const expectedUrl: string = todoListService.todoUrl + '/' + targetId;
+    const req = httpTestingController.expectOne(expectedUrl);
+    expect(req.request.method).toEqual('GET');
+    req.flush(targetTodo);
+  });
 });

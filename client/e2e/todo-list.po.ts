@@ -1,8 +1,18 @@
 import {browser, by, element, Key} from 'protractor';
 
 export class TodoPage {
-    navigateTo() {
+    navigateToTodos() {
         return browser.get('/todos');
+    }
+
+    clickMenuButton() {
+        let menuButton = element(by.id('nav button'));
+        menuButton.click();
+    }
+
+    clickFryFromMenu() {
+        let fryButton = element(by.id('fry button'));
+        fryButton.click();
     }
 
     //http://www.assertselenium.com/protractor/highlight-elements-during-your-protractor-test-run/

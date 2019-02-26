@@ -25,12 +25,12 @@ describe('Todo list', () => {
     });
 
     it('should get and highlight Todo Name attribute ', () => {
-        page.navigateTo();
+        page.navigateToTodos();
         expect(page.getTodoTitle()).toEqual('Todos');
     });
 
     it('should type something in filter owner box and check that it returned correct element', () => {
-        page.navigateTo();
+        page.navigateToTodos();
         page.typeAnOwner("r");
         expect(page.getUniqueTodo("58895985c1849992336c219b")).toEqual("58895985c1849992336c219b (Fry)");
         page.backspace();
@@ -44,7 +44,7 @@ describe('Todo list', () => {
     });
 
     it('should type something in filter body box and check that it returned correct element', () => {
-        page.navigateTo();
+        page.navigateToTodos();
         page.typeABody("non");
         expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("58895985a22c04e761776d54 (Blanche)");
         for (let i = 0; i < 3; i++) {
@@ -59,12 +59,14 @@ describe('Todo list', () => {
         expect(page.getUniqueTodo("58895985a22c04e761776d54")).toEqual("58895985a22c04e761776d54 (Blanche)");
     });
 
-//    TODO: Owner name filtering in combination with STATUS and BODY
     it('should type something in filter owner and filter body and filter status boxes and check that it returned correct element', () => {
-      page.navigateTo();
+      page.navigateToTodos();
       page.typeAnOwner("blanche");
       page.typeABody("sint ipsum");
       page.typeAStatus("incomplete");
       expect(page.getUniqueTodo("5889598585bda42fb8388ba1")).toEqual("5889598585bda42fb8388ba1 (Blanche)");
     });
+
 });
+
+

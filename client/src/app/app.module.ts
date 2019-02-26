@@ -17,14 +17,13 @@ import {UserComponent} from './users/user.component';
 import {FryComponent} from './todos/fry.component';
 import {TodoListComponent} from "./todos/todo-list.component";
 
-import {TestHighlight} from "./users/testhighlight/testhighlight.component";
-
 //added by Michael due to error I posted in Slack
 import {MatCardModule} from '@angular/material/card';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { NoConflictStyleCompatibilityMode } from '@angular/material'
 
+// import { HighlightModule } from '../../node_modules/ngx-highlight/highlight.module';
 
 @NgModule({
   imports: [
@@ -37,6 +36,7 @@ import { NoConflictStyleCompatibilityMode } from '@angular/material'
     MatTooltipModule,
     MatExpansionModule,
     NoConflictStyleCompatibilityMode,
+    // HighlightModule
 
 ],
   declarations: [
@@ -46,7 +46,6 @@ import { NoConflictStyleCompatibilityMode } from '@angular/material'
     UserComponent,
     FryComponent,
     TodoListComponent,
-    TestHighlight
 
   ],
   providers: [
