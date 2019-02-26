@@ -1,17 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {TodoListService} from './todo-list.service';
 import {Todo} from './todo';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from "rxjs/Observable";
 
 @Component({
-  selector: 'app-todo-list-component',
-  templateUrl: 'todo-list.component.html',
-  styleUrls: ['./todo-list.component.css'],
+  selector: 'app-fry-component',
+  styleUrls: ['./fry.component.css'],
+  templateUrl: 'fry.component.html',
   providers: []
 })
 
-export class TodoListComponent implements OnInit {
-  // These are public so that tests can reference them (.spec.ts)
+export class FryComponent implements OnInit {
+  public todo: Todo = null;
+  private id: string;
+
   public todos: Todo[];
   public filteredTodos: Todo[];
 
@@ -19,34 +21,13 @@ export class TodoListComponent implements OnInit {
   public todoStatus: string;
   public todoBody: string;
 
-  // Inject the TodoListService into this component.
-  // That's what happens in the following constructor.
-  //
-  // We can call upon the service for interacting
-  // with the server.
-
   constructor(private todoListService: TodoListService) {
-
+    // this.todos = this.todoListService.getTodos();
   }
 
-  // public highlight(searchOwner: string, searchStatus: string, searchBody: string): Todo[] {
-  //   if (searchOwner != null) {
-  //
-  //   }
-  // }
-
-  public filterTodos(searchOwner: string, searchStatus: string, searchBody: string): Todo[] {
+  public filterTodosForOwner(searchStatus: string, searchBody: string): Todo[] {
 
     this.filteredTodos = this.todos;
-
-    // Filter by owner
-    if (searchOwner != null) {
-      searchOwner = searchOwner.toLocaleLowerCase();
-
-      this.filteredTodos = this.filteredTodos.filter(todo => {
-        return !searchOwner || todo.owner.toLowerCase().indexOf(searchOwner) !== -1;
-      });
-    }
 
     // Filter by status
     if (searchStatus != null) {
@@ -75,10 +56,6 @@ export class TodoListComponent implements OnInit {
     return this.filteredTodos;
   }
 
-  /**
-   * Starts an asynchronous operation to update the todos list
-   *
-   */
   refreshTodos(): Observable<Todo[]> {
     // Get Todos returns an Observable, basically a "promise" that
     // we will get the data from the server.
@@ -86,12 +63,11 @@ export class TodoListComponent implements OnInit {
     // Subscribe waits until the data is fully downloaded, then
     // performs an action on it (the first lambda)
 
-    const todos: Observable<Todo[]> = this.todoListService.getTodos();
+    const todos: Observable<Todo[]> = this.todoListService.getTodosByOwner();
     todos.subscribe(
       returnedTodos => {
         this.todos = returnedTodos;
-        this.filterTodos(this.todoOwner, this.todoStatus, this.todoBody);
-        // this.highlight(this.todoOwner, this.todoStatus, this.todoBody);
+        this.filterTodosForOwner(this.todoStatus, this.todoBody);
       },
       err => {
         console.log(err);
@@ -99,7 +75,26 @@ export class TodoListComponent implements OnInit {
     return todos;
   }
 
+  private subscribeToServiceForId() {
+    if (this.id) {
+      this.todoListService.getTodoById(this.id).subscribe(
+        todo => this.todo = todo,
+        err => {
+          console.log(err);
+        }
+      );
+    }
+  }
+
+  setId(id: string) {
+    this.id = id;
+    this.subscribeToServiceForId();
+  }
+
   ngOnInit(): void {
+    this.subscribeToServiceForId();
     this.refreshTodos();
   }
+
+
 }

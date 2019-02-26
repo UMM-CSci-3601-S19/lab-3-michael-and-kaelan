@@ -5,6 +5,8 @@ import {UserListService} from './user-list.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 describe('User component', () => {
 
   let userComponent: UserComponent;
@@ -44,7 +46,8 @@ describe('User component', () => {
 
     TestBed.configureTestingModule({
       declarations: [UserComponent],
-      providers: [{provide: UserListService, useValue: userListServiceStub}]
+      providers: [{provide: UserListService, useValue: userListServiceStub}],
+      imports: [MatTooltipModule]
     });
   });
 

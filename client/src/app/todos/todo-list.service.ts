@@ -20,4 +20,9 @@ export class TodoListService {
   getTodoById(id: string): Observable<Todo> {
     return this.httpClient.get<Todo>(this.todoUrl + '/' + id);
   }
+
+//our new serverside filtering
+  getTodosByOwner(): Observable<Todo[]> {
+    return this.httpClient.get<Todo[]>(this.todoUrl + '?owner=Fry');
+  }
 }
