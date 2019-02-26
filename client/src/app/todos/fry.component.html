@@ -5,6 +5,13 @@
       <mat-card-title id="todo-list-title">Fry's Todos</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-content>
+        This is the page where I implemented server side filtering by todo owner (Fry in particular). That leaves fields for searching by status and body. Like the todos page, I wanted more tests and CSS highlighting of words via search fields, but time/partner constraints got the best of me. Also, the radio button status filtering does not work. I think I got close to figuring that out but I need to sleep and work on any class but this one. To filter by status, the "Filter by status" field must have the values "complete" or "incomplete" typed out (case insensitive).
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        Unlike the todos page, this is what an average user would see.
+      </mat-card-content>
+      <mat-card-content>
         <mat-form-field>
           <input matInput id="todoStatus" #input placeholder="Filter by status"
                  (input)="todoStatus = $event.target.value">
@@ -12,6 +19,22 @@
         <mat-form-field>
           <input matInput id="todoBody" #input placeholder="Filter by body" (input)="todoBody = $event.target.value">
         </mat-form-field>
+
+        <mat-radio-group>
+          <mat-radio-button id="todoStatusComplete" value="complete">Complete</mat-radio-button>
+          <mat-radio-button id="todoStatusIncomplete" value="incomplete">Incomplete</mat-radio-button>
+        </mat-radio-group>
+
+        <div>
+          <ul class="list-group">
+            <li class="list-group-item"  *ngFor="let item of itemsList">
+              <input type="radio" [(ngModel)]="radioSelected" name="list_name" value="{{item.value}}" (change)="onItemChange(item)"/>
+              {{item.name}}
+
+            </li>
+          </ul>
+        </div>
+
 
         <mat-accordion *ngIf="todos; else todosError">
           <mat-expansion-panel #elem [id]="todo._id" *ngFor="let todo of this.filterTodosForOwner(todoStatus, todoBody)">

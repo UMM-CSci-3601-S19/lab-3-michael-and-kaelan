@@ -14,6 +14,7 @@ export class TodoListComponent implements OnInit {
   // These are public so that tests can reference them (.spec.ts)
   public todos: Todo[];
   public filteredTodos: Todo[];
+  // public filteredTodosStatus: Todo[];
 
   public todoOwner: string;
   public todoStatus: string;
@@ -29,11 +30,6 @@ export class TodoListComponent implements OnInit {
 
   }
 
-  // public highlight(searchOwner: string, searchStatus: string, searchBody: string): Todo[] {
-  //   if (searchOwner != null) {
-  //
-  //   }
-  // }
 
   public filterTodos(searchOwner: string, searchStatus: string, searchBody: string): Todo[] {
 
@@ -91,7 +87,6 @@ export class TodoListComponent implements OnInit {
       returnedTodos => {
         this.todos = returnedTodos;
         this.filterTodos(this.todoOwner, this.todoStatus, this.todoBody);
-        // this.highlight(this.todoOwner, this.todoStatus, this.todoBody);
       },
       err => {
         console.log(err);

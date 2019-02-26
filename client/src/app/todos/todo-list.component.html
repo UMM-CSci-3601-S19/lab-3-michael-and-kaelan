@@ -5,6 +5,14 @@
       <mat-card-title id="todo-list-title">Todos</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-content>
+        I originally implemented all filtering via Angular. This is the page with all that Angular filtering and no serverside filtering. I have some tests for combinations of things, but not as many as I would have wanted if I had more time/a partner. Additionally, I didn't have time for any CSS stuff to make the cut, but I tried many different methods for highlighting words on each todo card based on input parameters. Never figured that one out. Also, the radio button status filtering does not work. I think I got close to figuring that out but I need to sleep and work on any class but this one. To filter by status, the "Filter by status" field must have the values "complete" or "incomplete" typed out (case insensitive).
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+I like to think of this page as what an admin would see. An average user wouldn't see everyone's todos. The Fry page, on the other hand, is a more realistic user interface for the average end user.
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-content>
         <mat-form-field>
           <input matInput id="todoOwner" #input placeholder="Filter by owner" (input)="todoOwner = $event.target.value">
         </mat-form-field>

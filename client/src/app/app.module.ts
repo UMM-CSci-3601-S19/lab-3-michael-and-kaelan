@@ -16,6 +16,8 @@ import {CustomModule} from './custom.module';
 import {UserComponent} from './users/user.component';
 import {FryComponent} from './todos/fry.component';
 import {TodoListComponent} from "./todos/todo-list.component";
+import {MatRadioModule} from '@angular/material/radio';
+
 
 //added by Michael due to error I posted in Slack
 import {MatCardModule} from '@angular/material/card';
@@ -36,6 +38,7 @@ import { NoConflictStyleCompatibilityMode } from '@angular/material'
     MatTooltipModule,
     MatExpansionModule,
     NoConflictStyleCompatibilityMode,
+    MatRadioModule
     // HighlightModule
 
 ],
